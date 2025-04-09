@@ -1,7 +1,48 @@
+# .dockerignore
+
+# Ignore version control
+.git/
+.gitignore
+
+# Ignore local development files
+.env
+.venv/
+venv/
+env/
+
+# Ignore Python cache and virtual environment
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore local logs and test files
+logs/
 *.log
-*.env
-*.git
+tests/
+
+# Ignore build and distribution files
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Ignore documentation
+docs/
+*.md
+
+# Ignore Docker compose files (if not needed)
+docker-compose.yml
+docker-compose.*.yml
+
+# Ignore any local configuration files
+config_local.py
+settings_local.py
+
+# Ignore macOS specific files
+.DS_Store

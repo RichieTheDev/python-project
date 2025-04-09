@@ -1,15 +1,15 @@
 # Stage 1: Build stage
-FROM python:alpine3.18e as build
+FROM python:3.13-alpine AS build
 
 # Set working directory
 WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt  # Ensures no cache is stored
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Stage 2: Runtime stage
-FROM python:alpine3.18e
+FROM python:3.13-alpine
 
 # Set working directory
 WORKDIR /app
@@ -18,12 +18,11 @@ WORKDIR /app
 ENV FLASK_ENV=production
 
 # Copy installed dependencies from build
-COPY --from=build /root/.local /root/.local
-ENV PATH=/root/.local/bin:$PATH
+COPY --from=build /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
+COPY --from=build /usr/local/bin /usr/local/bin
 
 # Copy app code
-COPY app/ ./app/
-COPY app/main.py .
+COPY main.py .
 
 # Expose the app port
 EXPOSE 5000
